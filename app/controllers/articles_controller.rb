@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [ :show, :edit, :update, :destroy ]
 
   def show
   end
@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
       flash[:notice] = "Article was created succesfully."
       redirect_to @article
     else
-      render 'new'
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -30,10 +30,10 @@ class ArticlesController < ApplicationController
       flash[:notice] = "Article was updated succesfully."
       redirect_to @article
     else
-      render 'edit'
-    end 
+      render "edit", status: :unprocessable_entity
+    end
   end
-  
+
   def destroy
     @article.destroy
     redirect_to articles_path
